@@ -4,6 +4,14 @@ public class Expense {
     private String description;
 
     public Expense(int valueInCents, String category, String description) {
+        if (valueInCents <= 0) {
+            throw new IllegalArgumentException("Expense value cannot be negative or zero");
+        }
+
+        if (category.isBlank()) {
+            throw new IllegalArgumentException("Expense category is required and cannot be empty or just space");
+        }
+
         this.valueInCents = valueInCents;
         this.category = category;
         this.description = description;
