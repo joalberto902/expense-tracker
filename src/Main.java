@@ -4,10 +4,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ExpenseTracker tracker = new ExpenseTracker();
-        
-        tracker.addExpense(new Expense(1250, "food", "daily food"));
-        tracker.addExpense(new Expense(5000, "food", "weekend out"));
-        tracker.addExpense(new Expense(10000, "fuel", "weekly gasoline"));
 
         Scanner scanner = new Scanner(System.in);
 
