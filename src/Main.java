@@ -11,6 +11,53 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+        boolean shouldExit = false;
+        do {
+            printMenu();
+            String opt = scanner.nextLine();
+            
+            switch (opt) {
+                case "1" -> {
+                    addExpense(scanner, tracker);
+                }
+                case "2" -> {
+                    listExpenses(tracker);
+                }
+                case "3" -> {
+                    categoryTotals(tracker);
+                }
+                case "0" -> shouldExit = true;
+                default -> {
+                    System.out.println("invalid option, please try again.");
+                }
+            }
+        }
+        while (!shouldExit);
+
+        System.out.println("Exiting....");
+    }
+
+    private static void printMenu() {
+        String divisor = "#";
+        System.out.println(divisor.repeat(20));
+        System.out.printf(
+            "1 - Add Expense%n2 - List Expenses%n3 - Totals by category%n0 - Exit%n"
+        );
+        System.out.println(divisor.repeat(20));
+    }
+
+    private static int readValue(Scanner scanner) {
+        while (true) {
+            try {
+                System.out.print("Enter value in cents: ");
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number, try again");
+            }
+        }
+    }
+
+    private static void addExpense(Scanner scanner, ExpenseTracker tracker) {
         while (true) {
             try {
                 int value = readValue(scanner);
@@ -25,16 +72,21 @@ public class Main {
                 System.out.printf("description: %s%n", description);
 
                 tracker.addExpense(new Expense(value, category, description));
-                break;
+                System.out.println("Expense added successfully.");
+                return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
 
-        for (Expense e: tracker.getExpenseList()) {
-            System.out.println(e);
+    private static void listExpenses(ExpenseTracker tracker) {
+        for (Expense exp: tracker.getExpenseList()) {
+            System.out.println(exp);
         }
+    }
 
+    private static void categoryTotals(ExpenseTracker tracker) {
         Map<String, Integer> categoryTotals = tracker.getCategoryTotals();
 
         for (Map.Entry<String, Integer> entry: categoryTotals.entrySet()) {
@@ -43,18 +95,6 @@ public class Main {
                 entry.getKey(),
                 entry.getValue() / 100.0
             );
-        }
-    }
-
-    private static int readValue(Scanner scanner) {
-        int value;
-        while (true) {
-            try {
-                System.out.print("Enter value in cents: ");
-                return Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid number, try again");
-            }
         }
     }
 }
