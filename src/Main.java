@@ -1,27 +1,18 @@
-import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
-        List<Expense> expenseList = new ArrayList<Expense>();
+        ExpenseTracker tracker = new ExpenseTracker();
         
-        expenseList.add(new Expense(1250, "food", "daily food"));
-        expenseList.add(new Expense(5000, "food", "weekend out"));
-        expenseList.add(new Expense(10000, "fuel", "weekly gasoline"));
+        tracker.addExpense(new Expense(1250, "food", "daily food"));
+        tracker.addExpense(new Expense(5000, "food", "weekend out"));
+        tracker.addExpense(new Expense(10000, "fuel", "weekly gasoline"));
         
-        for (Expense e: expenseList) {
+        for (Expense e: tracker.getExpenseList()) {
             System.out.println(e);
         }
 
-        Map<String, Integer> categoryTotals = new TreeMap<>();
-        for (Expense e: expenseList) {
-            categoryTotals.put(
-                e.getCategory(),
-                categoryTotals.getOrDefault(e.getCategory(), 0) + e.getValueInCents()
-            );
-        }
+        Map<String, Integer> categoryTotals = tracker.getCategoryTotals();
 
         for (Map.Entry<String, Integer> entry: categoryTotals.entrySet()) {
             System.out.printf(
