@@ -11,8 +11,17 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter value in cents: ");
-        int value = Integer.parseInt(scanner.nextLine());
+        int value;
+        while (true) {
+            try {
+                System.out.print("Enter value in cents: ");
+                value = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number, try again");
+            }
+        }
+
         System.out.printf("valueInCents: %d%n", value);
 
         System.out.print("Enter category: ");
