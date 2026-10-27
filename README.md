@@ -76,11 +76,9 @@ src/
 ## Limitations
 
 - Expenses are kept in memory only and are lost when the program exits.
-- Three sample expenses are added at startup.
 
 ## Roadmap
 
 - [ ] Persist expenses to a file
 - [ ] Unit tests with JUnit
 - [ ] Build with Maven
-- [ ] Remove the sample data from startup
