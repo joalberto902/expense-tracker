@@ -13,17 +13,7 @@ public class Main {
 
         while (true) {
             try {
-                int value;
-                while (true) {
-                    try {
-                        System.out.print("Enter value in cents: ");
-                        value = Integer.parseInt(scanner.nextLine());
-                        break;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid number, try again");
-                    }
-                }
-
+                int value = readValue(scanner);
                 System.out.printf("valueInCents: %d%n", value);
 
                 System.out.print("Enter category: ");
@@ -53,6 +43,18 @@ public class Main {
                 entry.getKey(),
                 entry.getValue() / 100.0
             );
+        }
+    }
+
+    private static int readValue(Scanner scanner) {
+        int value;
+        while (true) {
+            try {
+                System.out.print("Enter value in cents: ");
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number, try again");
+            }
         }
     }
 }
