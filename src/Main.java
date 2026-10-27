@@ -11,28 +11,35 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        int value;
         while (true) {
             try {
-                System.out.print("Enter value in cents: ");
-                value = Integer.parseInt(scanner.nextLine());
+                int value;
+                while (true) {
+                    try {
+                        System.out.print("Enter value in cents: ");
+                        value = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid number, try again");
+                    }
+                }
+
+                System.out.printf("valueInCents: %d%n", value);
+
+                System.out.print("Enter category: ");
+                String category = scanner.nextLine();
+                System.out.printf("category: %s%n", category);
+                
+                System.out.print("Enter description: ");
+                String description = scanner.nextLine();
+                System.out.printf("description: %s%n", description);
+
+                tracker.addExpense(new Expense(value, category, description));
                 break;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid number, try again");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
-
-        System.out.printf("valueInCents: %d%n", value);
-
-        System.out.print("Enter category: ");
-        String category = scanner.nextLine();
-        System.out.printf("category: %s%n", category);
-        
-        System.out.print("Enter description: ");
-        String description = scanner.nextLine();
-        System.out.printf("description: %s%n", description);
-
-        tracker.addExpense(new Expense(value, category, description));
 
         for (Expense e: tracker.getExpenseList()) {
             System.out.println(e);
