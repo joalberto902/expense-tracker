@@ -1,5 +1,7 @@
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,9 +10,19 @@ public class Main {
         expenseList.add(new Expense(1250, "food", "daily food"));
         expenseList.add(new Expense(5000, "food", "weekend out"));
         expenseList.add(new Expense(10000, "fuel", "weekly gasoline"));
-
+        
         for (Expense e: expenseList) {
             System.out.println(e);
         }
+
+        Map<String, Integer> categoryTotals = new HashMap<>();
+        for (Expense e: expenseList) {
+            categoryTotals.put(
+                e.getCategory(),
+                categoryTotals.getOrDefault(e.getCategory(), 0) + e.getValueInCents()
+            );
+        }
+
+        System.out.println(categoryTotals);
     }
 }
