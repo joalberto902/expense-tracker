@@ -17,4 +17,12 @@ public class Expense {
                 this.category,
                 this.description);
     }
+
+    public int getValueInCents() {
+        return this.valueInCents;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
 }
