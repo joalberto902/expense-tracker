@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Main {
             System.out.println(e);
         }
 
-        Map<String, Integer> categoryTotals = new HashMap<>();
+        Map<String, Integer> categoryTotals = new TreeMap<>();
         for (Expense e: expenseList) {
             categoryTotals.put(
                 e.getCategory(),
@@ -23,6 +23,12 @@ public class Main {
             );
         }
 
-        System.out.println(categoryTotals);
+        for (Map.Entry<String, Integer> entry: categoryTotals.entrySet()) {
+            System.out.printf(
+                "%s: %.2f%n",
+                entry.getKey(),
+                entry.getValue() / 100.0
+            );
+        }
     }
 }
